@@ -1,0 +1,4 @@
+AuthName "Authentication" 
+AuthType Basic
+AuthUserFile D:/OpenServer/domains/mysite.local/ebook/admin/.htpasswd
+require valid-user

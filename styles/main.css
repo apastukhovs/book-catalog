@@ -1,0 +1,219 @@
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.main-container {
+    width: 1920px;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0 auto;
+    background: #f8f8f8;
+}
+
+form {
+  margin-bottom: 22px;
+}
+
+.edit-book label {
+  color: #648880;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+span {
+    display: block;
+    font-size: 20px;
+    color: yellowgreen;
+    margin-left: 30px;
+}
+
+h3 {
+    font-size: 20px;
+    color: cadetblue;
+    margin-left: 30px;
+}
+
+.edit-book input,
+.edit-book select,
+.edit-book textarea {
+  border: 1px solid #c6c9cc;
+  border-radius: 5px;
+  color: #888;
+  display: block;
+  margin: 5px 0 27px 0;
+  padding: 5px 8px;
+}
+
+.edit-book input,
+.edit-book textarea {
+  width: 50%;
+}
+
+.edit-book textarea {
+  height: 78px;
+}
+
+.btn-default {
+  border: 0;
+  background: #648880;
+  padding: 12px 30px;
+  margin: 10px 5px;
+  font-size: 14px;
+             
+}
+.btn-default:hover {
+  background: #77a198;
+}
+
+h1 {
+    text-align: center;
+    color : #648880;
+}
+
+a {
+    text-decoration: none;
+        color: #648880;
+
+}
+
+ul, li {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.add {
+    color : #648880;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 700;
+    
+}
+
+.edit {
+    padding-left: 40px;
+    color: #648880;
+    font-size: 20px;
+}
+
+.edit li {
+    padding: 10px 20px; 
+    list-style: circle;    
+    margin-left: 30px;
+}
+
+.edit li > a {
+    color: #648880;
+}
+
+header {
+    color: black;
+    background-color: black;
+}
+nav {
+    margin-bottom: 50px;
+    background-color: black;
+}
+.main-menu {
+    display: inline-block;
+}
+
+.main-menu li {
+    display: inline-block;
+    margin-left: 50px;
+    text-transform: uppercase;
+}
+
+.main-menu li > a {
+    text-decoration: none;
+    color: coral;
+}
+
+.main-menu li > a:hover {
+    text-decoration: underline;
+    color: #f9d789;
+}
+
+.header-title {
+    text-align: center;
+    padding: 0 200px 20px 200px;
+}
+
+.header-title h1 {
+    font-size: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    margin-top: 70px;
+}
+
+.book-information {
+    margin-bottom: 30px;
+}
+
+.book-information p{
+    padding: 10px 30px;
+}
+
+.book-information h2 {
+    font-size: 32px;
+    font-weight: 700;
+    padding: 20px;
+    color: #648880;
+    text-align: center;
+}
+
+.book-information p {
+    line-height: 1.5;
+}
+
+
+.book-menu {
+    font-size: 50px;
+}
+
+
+.book, .books-items {
+    margin-top: 50px;
+    display: block;
+    border-width:1;
+    border-color: rgb(190,190,190);
+    border-style: solid;
+}
+
+.books-items li {
+    display: inline-block;
+    width: 30%;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    margin-left: 15px;
+    border: 6px solid coral;
+    border-radius: 15px;
+}
+
+.books-items h2 {
+    text-align: center;
+    font-size: 30px;
+    
+}
+
+.books-items h3 {
+    font-size: 16px;
+}
+
+.books-items a {
+    text-decoration: none;
+}
+
+
+.footer-info {
+    margin-top: 80px;
+    border-top: 1px solid #cccccc;
+    padding-top: 80px;
+    padding-bottom: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
