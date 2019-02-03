@@ -27,22 +27,21 @@ class Genre {
     
     public function getAllGenres() {
         $sql = "SELECT id, title FROM genre";
-        $result  = $this->link->query($sql);
-
-        return getData($result);
-    }
+        return $this->link->select($sql);
+       }
 
     public function addGenre($title) {
         $sql = "SELECT id FROM Genre WHERE title = '$title' LIMIT 1";
-        $result  = $this->link->query($sql);
-        if ($result->num_rows > 0) {
-            $book = getData($result);
-            return $book[0]['id'];
+        $result  = $this->link->select($sql);
+           if (count($result) > 0) {
+            
+            return $result[0]['id'];
         }
         
         $sql = "INSERT INTO Genre (title) VALUES ('$title') ";
-        if ($this->link->query($sql) === TRUE) {
-            return $this->link->insert_id;
+        $result = $this->link->query($sql);
+        if ($result) {
+            return $result->insert_id;
         }
         else {
             return 0;
@@ -56,10 +55,10 @@ class Genre {
 
     public function getGenreByBookId($id) {
         $sql = "SELECT title FROM genre, genrebook WHERE book_id = $id AND genre_id=id";
-        $result  = $this->link->query($sql);
-        if ($result->num_rows > 0) {
+        $result  = $this->link->select($sql);
+        if ( count($result) > 0) {
             $genrestr = '';    
-            while($genre = $result->fetch_assoc()) {
+            foreach($result as $genre) {
         
                 $genrestr .= $genre['title'] . ' ';
             }
@@ -95,17 +94,13 @@ class Book {
             $addAuthors = " ,authorbook ab WHERE b.id = ab.book_id AND ab.author_id =  $authorId";
         }
         $sql = "SELECT b.id, b.title, b.price, b.description FROM book b $addGenres $addAuthors";
-        $result  = $this->link->query($sql);
-        return getData($result);
-    }
+        return $this->link->select($sql);
+        }
 
     public function getBookById($id) {
         $sql = "SELECT id, title, price, description FROM book WHERE id = $id";
-        $result = $this->link->query($sql);
-        if ($result->num_rows > 0) {
-            $book = getData($result);
-            return $book[0];
-        }
+        $result = $this->link->select($sql);
+        return $result[0];
     }
 
     public function addBook($title, $price, $description) {
@@ -134,24 +129,20 @@ class Author {
         $this->link = $link;
     }
 
-    public function sum() {
-        return $this->firstNumber + $this->secondNumber;
-    }
-
     public function addAuthor($name) {
         $sql = "SELECT id FROM author WHERE name = '$name' LIMIT 1";
-        $result  = $this->link->query($sql);
-        if ($result->num_rows > 0) {
-            $book = getData($result);
-            return $book[0]['id'];
+        $result  = $this->link->select($sql);
+        if (count($result) > 0) {
+            return $result[0]['id'];
         }
         
         if(!trim($name)) {
             return 0;
         }
         $sql = "INSERT INTO author (name) VALUES ('$name') ";
-        if ($this->link->query($sql) === TRUE) {
-            return $this->link->insert_id;
+        $result = $this->link->query($sql);
+        if ($result) {
+            return $result->insert_id;
         }
         else {
             return 0;
@@ -165,23 +156,20 @@ class Author {
     
     public function getAllAuthors() {
         $sql = "SELECT id, name FROM author";
-        $result  = $this->link->query($sql);
-        return getData($result);
+        return $this->link->select($sql);
     }
     
     public function getAuthorByBookId($id) {
         $sql = "SELECT name FROM author, authorbook WHERE book_id = $id AND author_id=id";
-        $result  = $this->link->query($sql);
-        $numRows = $result->num_rows;
+        $result  = $this->link->select($sql);
         
-        if ($numRows > 0) {
+        
+        if (count($result) > 0) {
             $authorstr = '';
-    
-            $authors = getData($result);
-            foreach($authors as $key => $author) {
+                foreach($result as $key => $author) {
                 $authorstr .= $author['name'];
                 
-                if ($key < $numRows - 1) {
+                if ($key < count($result) - 1) {
                     $authorstr .= ', ';
                 }
             }
