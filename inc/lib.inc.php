@@ -38,19 +38,18 @@ class Genre {
             return $result[0]['id'];
         }
         
-        $sql = "INSERT INTO Genre (title) VALUES ('$title') ";
-        $result = $this->link->query($sql);
-        if ($result) {
-            return $result->insert_id;
-        }
-        else {
-            return 0;
-        }
+        $sql = "INSERT INTO Genre (title) VALUES (:title) ";
+        return $this->link->insert($sql, array(
+            ':title' => $title
+        ));
     }
 
     public function  addGenreToBook($bookId, $genreId) {
-        $sql = "INSERT INTO genrebook (genre_id, book_id) VALUES ($genreId, $bookId) ";
-        return $this->link->query($sql);
+        $sql = "INSERT INTO genrebook (genre_id, book_id) VALUES (:genreId, :bookId) ";
+        return $this->link->insert($sql, array (
+            ':genreId' => $genreId, 
+            ':bookId' => $bookId
+        ));
     }
 
     public function getGenreByBookId($id) {
@@ -69,8 +68,10 @@ class Genre {
 
     public function  deleteGenreFromBook($bookId) {
          $sql = "DELETE FROM genrebook 
-                WHERE book_id = $bookId";
-        return $this->link->query($sql);
+                WHERE book_id = :bookId";
+        return $this->link->query($sql, array (
+               ':bookId' => $bookId
+        ));
         
     }
     
@@ -104,20 +105,24 @@ class Book {
     }
 
     public function addBook($title, $price, $description) {
-         $sql = "INSERT INTO book (title, price, description) VALUES ('$title', '$price', '$description' )";
-         if ($this->link->query($sql) === TRUE) {
-            return $this->link->insert_id;
-        }
-        else {
-            return 0;
-        }
+         $sql = "INSERT INTO book (title, price, description) VALUES (:title, :price, :description)";
+         return $this->link->insert($sql, array(
+             ':title' => $title,
+             ':price' => $price,
+             ':description' => $description
+         )) ;
     }
 
     public function updateByBookId($id, $title, $description, $price) {      
         $sql = "UPDATE book
-                SET title='$title', description='$description', price='$price'
-                WHERE id = $id";    
-        return $this->link->query($sql);        
+                SET title=:title, description=:description, price=:price
+                WHERE id = :id";    
+        return $this->link->query($sql, array (
+            ':title' => $title, 
+            ':description' => $description,
+            ':price' => $price,
+            ':id' => $id
+        ));        
     }
 
 }
@@ -139,19 +144,18 @@ class Author {
         if(!trim($name)) {
             return 0;
         }
-        $sql = "INSERT INTO author (name) VALUES ('$name') ";
-        $result = $this->link->query($sql);
-        if ($result) {
-            return $result->insert_id;
-        }
-        else {
-            return 0;
-        }
+        $sql = "INSERT INTO author (name) VALUES (:name) ";
+        return $this->link->insert($sql, array(
+            ':name' => $name
+        ));
     }
     
     public function  addAuthorToBook($bookId, $authorId) {
-        $sql = "INSERT INTO authorbook (author_id, book_id) VALUES ($authorId, $bookId) ";
-        return $this->link->query($sql);
+        $sql = "INSERT INTO authorbook (author_id, book_id) VALUES (:authorId, :bookId) ";
+        return $this->link->insert($sql, array (
+            ':authorId' => $authorId, 
+            ':bookId' => $bookId,
+            ));
     }
     
     public function getAllAuthors() {
@@ -180,7 +184,9 @@ class Author {
         
     public function  deleteAuthorFromBook($bookId) {
          $sql = "DELETE FROM authorbook 
-                WHERE book_id = $bookId";
-        return $this->link->query($sql);
+                WHERE book_id = :bookId";
+        return $this->link->query($sql, array (
+            ':bookId' => $bookId
+            ));
     }
 }

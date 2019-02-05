@@ -1,4 +1,4 @@
 AuthName "Authentication" 
 AuthType Basic
-AuthUserFile D:/OpenServer/domains/mysite.local/ebook/admin/.htpasswd
+AuthUserFile D:/OpenServer/domains/mysite.local/book-catalog/admin/.htpasswd
 require valid-user
